@@ -11,7 +11,6 @@ export class InsecureGuard implements CanActivate {
     }
 
     canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        this.authService.getCredentials();
         let sub = this.authService.authentication
             .map(auth => auth.authenticated)
             .subscribe(authenticated => {

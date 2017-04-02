@@ -1,3 +1,9 @@
 <div class="jumbotron col-8 offset-2 mt-5">
     <h1>SECURE PAGE</h1>
+
+    <button class="btn btn-outline-primary mt-4 clickable" (click)="getData()">GET SOME DATA</button>
+
+    <ul *ngIf="data" class="mt-4">
+        <li *ngFor="let item of data">{{item.data1}}: {{item.data2}}</li>
+    </ul>
 </div>

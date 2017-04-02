@@ -15,7 +15,8 @@ export class HomeComponent implements OnInit{
     }
 
     ngOnInit() {
-        this.authService.getCredentials();
-        this.user = this.authService.authentication.map(auth => auth.name);
+        this.user = this.authService.authentication.map(auth => {
+            if(!!auth.credentials && !!auth.credentials.name) return auth.credentials.name;
+        });
     }
 }

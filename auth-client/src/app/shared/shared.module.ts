@@ -6,8 +6,12 @@ import {AuthService} from "./services/auth.service";
 import {HttpService} from "./services/http.service";
 import {SecureGuard} from "./guards/secure.guard";
 import {InsecureGuard} from "./guards/insecure.guard";
+import {LoadingSpinnerComponent} from "./loading-spinner/loading-spinner.component";
 
 @NgModule({
+    declarations: [
+        LoadingSpinnerComponent
+    ],
     imports: [
         BrowserModule,
         ReactiveFormsModule,
@@ -22,6 +26,7 @@ import {InsecureGuard} from "./guards/insecure.guard";
     exports: [
         BrowserModule,
         ReactiveFormsModule,
+        LoadingSpinnerComponent
     ]
 })
 export class SharedModule {
