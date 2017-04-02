@@ -47,12 +47,6 @@ public class OAuth2Config extends WebSecurityConfigurerAdapter {
                     .cors().disable();
     }
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("barry").password("password").roles("USER"); // ... etc.
-    }
-
     @Bean
     public FilterRegistrationBean oauth2ClientFilterRegistration(OAuth2ClientContextFilter filter) {
         FilterRegistrationBean registration = new FilterRegistrationBean();
@@ -63,20 +57,20 @@ public class OAuth2Config extends WebSecurityConfigurerAdapter {
 
     @Bean
     @ConfigurationProperties("github")
-    public ClientResources github() {
-        return new ClientResources();
+    public ClientProperties github() {
+        return new ClientProperties();
     }
 
     @Bean
     @ConfigurationProperties("facebook")
-    public ClientResources facebook() {
-        return new ClientResources();
+    public ClientProperties facebook() {
+        return new ClientProperties();
     }
 
     @Bean
     @ConfigurationProperties("google")
-    public ClientResources google() {
-        return new ClientResources();
+    public ClientProperties google() {
+        return new ClientProperties();
     }
 
     private Filter ssoFilter() {
@@ -89,7 +83,7 @@ public class OAuth2Config extends WebSecurityConfigurerAdapter {
         return filter;
     }
 
-    private Filter ssoFilter(ClientResources client, String path) {
+    private Filter ssoFilter(ClientProperties client, String path) {
         OAuth2ClientAuthenticationProcessingFilter filter = new OAuth2ClientAuthenticationProcessingFilter(path);
         OAuth2RestTemplate template = new OAuth2RestTemplate(client.getClient(), oauth2ClientContext);
         filter.setRestTemplate(template);
