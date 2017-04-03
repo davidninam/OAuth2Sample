@@ -16,9 +16,8 @@ public class UserResources {
     public Map<String, Object> user(OAuth2Authentication principal) {
         Map<String, Object> map = new LinkedHashMap<>();
         map.put("id", principal.getName());
-        map.put("authenticated", true);
-        map.put("credentials", (principal).getUserAuthentication().getDetails());
-
+        map.put("authenticated", principal.getUserAuthentication().isAuthenticated());
+        map.put("credentials", principal.getUserAuthentication().getDetails());
         return map;
     }
 }

@@ -1,13 +1,12 @@
 import {Injectable} from "@angular/core";
 import {Headers, Http, Response} from "@angular/http";
 import {Observable, Subject} from "rxjs";
+import {Promise} from "es6-promise";
 
 @Injectable()
 export class HttpService{
 
-    private headers: Headers = new Headers({
-        'X-Requested-With': 'XMLHttpRequest'
-    });
+    private headers: Headers = new Headers({'X-Requested-With': 'XMLHttpRequest'});
     private requestCount: number;
     private _loading: Subject<boolean>;
 
@@ -71,8 +70,8 @@ export class HttpService{
         }
     }
 
-    private static handleError(error: any, url: string): Observable<any> {
+    private static handleError(error: any, url: string): Promise<any> {
         console.error('An error occurred with request to ', url);
-        return Observable.of();
+        return Promise.reject(error)
     }
 }

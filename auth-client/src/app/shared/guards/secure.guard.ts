@@ -12,11 +12,11 @@ export class SecureGuard implements CanActivate {
     }
 
     canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        let sub = this.authService.authentication
+        this.authService.authentication
             .map(auth => auth.authenticated)
+            .take(1)
             .subscribe(authenticated => {
                 if(!authenticated) this.router.navigate(['']);
-                sub.unsubscribe();
             });
         return this.authService.authentication.map(auth => auth.authenticated);
     }
