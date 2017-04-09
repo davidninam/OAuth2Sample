@@ -4,13 +4,13 @@ import {Observable, Subject} from "rxjs";
 import {Promise} from "es6-promise";
 
 @Injectable()
-export class HttpService{
+export class HttpService {
 
     private headers: Headers = new Headers({'X-Requested-With': 'XMLHttpRequest'});
     private requestCount: number;
     private _loading: Subject<boolean>;
 
-    public get loading(): Observable<boolean>{
+    public get loading(): Observable<boolean> {
         return this._loading.asObservable();
     }
 
@@ -52,20 +52,20 @@ export class HttpService{
             .catch(error => HttpService.handleError(error, url));
     }
 
-    private setLoading(loading: boolean){
+    private setLoading(loading: boolean) {
         let lastVal = this.requestCount;
 
-        if(loading) this.requestCount++;
+        if (loading) this.requestCount++;
         else this.requestCount--;
 
-        if(this.requestCount == 0) this._loading.next(false);
-        if(this.requestCount == 1 && lastVal == 0) this._loading.next(true);
+        if (this.requestCount == 0) this._loading.next(false);
+        if (this.requestCount == 1 && lastVal == 0) this._loading.next(true);
     }
 
-    private mapRequest(res: Response): any{
+    private mapRequest(res: Response): any {
         try {
             return res.json();
-        }catch (e){
+        } catch (e) {
             return {};
         }
     }

@@ -1,7 +1,7 @@
 import {BrowserModule} from "@angular/platform-browser";
 import {NgModule} from "@angular/core";
 import {ReactiveFormsModule} from "@angular/forms";
-import {HttpModule} from "@angular/http";
+import {HttpModule, RequestOptions, ConnectionBackend, Http} from "@angular/http";
 import {AuthService} from "./services/auth.service";
 import {HttpService} from "./services/http.service";
 import {SecureGuard} from "./guards/secure.guard";
@@ -18,8 +18,8 @@ import {LoadingSpinnerComponent} from "./loading-spinner/loading-spinner.compone
         HttpModule
     ],
     providers: [
-        AuthService,
         HttpService,
+        AuthService,
         SecureGuard,
         InsecureGuard
     ],
